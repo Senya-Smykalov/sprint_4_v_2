@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 import static org.openqa.selenium.Keys.ARROW_DOWN;
 import static org.openqa.selenium.Keys.ENTER;
 
-public class OrderFormPageObject {
+public class OrderFormPage {
     private static WebDriver driver;
 
-    public OrderFormPageObject (WebDriver driver) {
+    public OrderFormPage (WebDriver driver) {
         this.driver = driver;
     }
     private By textName = (By.xpath("//input[@placeholder='* Имя']"));
@@ -22,7 +22,7 @@ public class OrderFormPageObject {
     //Поле формы заказа "Номер телефона"
     private By textPhoneNumber = (By.xpath("//input[@placeholder='* Телефон: на него позвонит курьер']"));
     //Кнопка "Далее" для дальнейшего оформления заказа
-    private By clickButtonFurther = (By.xpath("//button[text()='Далее']"));
+    private By buttonFurther = (By.xpath("//button[text()='Далее']"));
     //Поле формы заказа "Дата заказа"
     private By textOrderDate = (By.xpath("//input[@placeholder='* Когда привезти самокат']"));
     //выбор даты
@@ -39,10 +39,9 @@ public class OrderFormPageObject {
     private By textComment = (By.xpath("//input[@placeholder='Комментарий для курьера']"));
     //Клик в сплывающем окне "Вы дейсвтительно хотите оформить заказ"
     private By order = (By.xpath("//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']"));
-    private By clickYes = (By.xpath("//button[contains(text(), 'Да')]"));
-    //Кнопка "проверить статус" после оформления заказа
-    private By clickViewStatus = (By.xpath("//button[text()='Посмотреть статус']"));
+    private By buttonYes = (By.xpath("//button[contains(text(), 'Да')]"));
 
+    private By successfulOrder =(By.xpath(".//div[contains(@class, 'Order_ModalHeader')]"));
     public void textNumberOne(String name, String surname, String address, String metro, String phoneNumber){
         driver.findElement(textName).sendKeys(name);
         driver.findElement(textSurname).sendKeys(surname);
@@ -51,7 +50,7 @@ public class OrderFormPageObject {
         driver.findElement(textPhoneNumber).sendKeys(phoneNumber);
     }
     public void further(){
-        driver.findElement(clickButtonFurther).click();
+        driver.findElement(buttonFurther).click();
     }
     public void textNumberTwo() {
         driver.findElement(textOrderDate).click();
@@ -67,8 +66,11 @@ public class OrderFormPageObject {
         driver.findElement(order).click();
     }
     public void yes(){
-        driver.findElement(clickYes).click();
+        driver.findElement(buttonYes).click();
     }
-
+  public String check(){
+        driver.findElement(successfulOrder).getText();
+        return "Заказ оформлен";
+  }
 
 }
