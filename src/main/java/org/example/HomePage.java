@@ -16,7 +16,7 @@ public class HomePage {
     private By actualText = (By.id("accordion__panel-"));
     private By agreeWithCookie = (By.xpath(".//button[contains(@class, 'App_CookieButton')]"));
     private By goHomePage = (By.xpath("//a[@class='Header_LogoScooter__3lsAR']"));
-    ;
+    private By orderForm = (By.xpath("//div[@class='Order_Header__BZXOb']"));
 
     public void open() {
         driver.get(URL);
@@ -34,18 +34,24 @@ public class HomePage {
         driver.findElement(buttonBottomToOrder).click();
     }
 
-    public void questionTitle(String question) {
+    public void questionTitleClick(String question) {
         driver.findElement(By.xpath(".//div[text()='" + question + "']")).click();
     }
 
     public String questionText(int number) {
-       return driver.findElement(By.id("accordion__panel-" + number)).getText();
+        return driver.findElement(By.id("accordion__panel-" + number)).getText();
     }
-    public String questionActualText (int number){
+
+    public String questionActualText(int number) {
         return driver.findElement(By.id("accordion__panel-" + number)).getText();
 
     }
-    public void buttonSamocat(){
+
+    public void buttonSamocatClick() {
         driver.findElement(goHomePage).click();
+    }
+
+    public String orderFormOpens() {
+        return driver.findElement(orderForm).getText();
     }
 }
